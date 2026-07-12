@@ -14,10 +14,12 @@ public class Player : MonoBehaviour
     Vector3 moveVec;
 
     Rigidbody rigid;
+    Animator anim;
 
     void Awake()
     {
         rigid = GetComponent<Rigidbody>();
+        anim = GetComponentInChildren<Animator>();
     }
     void Update()
     {
@@ -37,6 +39,8 @@ public class Player : MonoBehaviour
         moveVec = new Vector3(moveX, 0, moveZ).normalized;
 
         transform.position += moveVec * Speed * Time.deltaTime;
+
+        anim.SetBool("isWalk", moveVec != Vector3.zero);
     }
 
     void Jump()
